@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.android.wangjj.R;
+import com.android.mylibrary.R;
 
 
 public class CircleView extends View {
