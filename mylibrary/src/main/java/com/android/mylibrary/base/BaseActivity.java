@@ -13,13 +13,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 import com.android.mylibrary.bean.EventMessage;
 import com.android.mylibrary.utils.ActivityUtils;
 import com.android.mylibrary.utils.EventBusUtils;
 import com.android.mylibrary.utils.NetworkUtils;
-import com.android.mylibrary.utils.ToastUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -61,7 +61,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!NetworkUtils.isNetworkConnected(this)) {
-            ToastUtils.show("当前网络不可用...请检查是否连接网络");
+            Toast.makeText(this,"当前网络不可用...请检查是否连接网络",Toast.LENGTH_LONG).show();
         }
 
     }

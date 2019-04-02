@@ -1,7 +1,7 @@
 package com.android.mylibrary.utils;
 
 
-
+import android.widget.Toast;
 
 import com.android.mylibrary.base.BaseActivity;
 
@@ -39,14 +39,14 @@ public class HttpUtils {
                     public void onError(Throwable e) {
                         callBack.error(e);
                         if (!NetworkUtils.isNetworkConnected(activity)) {
-                            ToastUtils.show("当前网络不可用...请检查是否连接网络");
+                            Toast.makeText(activity, "当前网络不可用...请检查是否连接网络", Toast.LENGTH_LONG).show();
                         } else {
                             if (e instanceof SocketTimeoutException) {
-                                ToastUtils.show("服务器连接超时...请确保网络通畅");
+                                Toast.makeText(activity, "服务器连接超时...请确保网络通畅", Toast.LENGTH_LONG).show();
                             } else if (e instanceof ConnectException) {
-                                ToastUtils.show("服务器连接异常");
+                                Toast.makeText(activity, "服务器连接异常", Toast.LENGTH_LONG).show();
                             } else {
-                                ToastUtils.show("服务器异常");
+                                Toast.makeText(activity, "服务器异常", Toast.LENGTH_LONG).show();
                             }
                         }
                         hide(isShowLoading);
