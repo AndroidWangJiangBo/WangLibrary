@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.wangjj.R;
+import com.android.mylibrary.R;
 
 
 public class LoadView extends RelativeLayout {
