@@ -5,6 +5,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -37,8 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     private boolean openStatusBar = false;
     //屏幕竖向开关
     private boolean openScreenPortrait = true;
-    //修改状态栏颜色开关
-    private boolean openChangeTitleColor = false;
+
     //eventbus开关
     private boolean openEventBus = false;
 
@@ -61,30 +61,28 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (!NetworkUtils.isNetworkConnected(this)) {
-            Toast.makeText(this,"当前网络不可用...请检查是否连接网络",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "当前网络不可用...请检查是否连接网络", Toast.LENGTH_LONG).show();
         }
 
     }
 
     private void changeAppStyle() {
         openFullWindows();
-        openChangeTitleColor();
         openStatusBar();
         openScreenPortrait();
     }
 
-    private void openChangeTitleColor() {
-        if (isOpenChangeTitleColor()) {
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                    getWindow().setStatusBarColor(getResources().getColor(android.R.color.holo_blue_dark));
-                    //底部导航栏
-                    //window.setNavigationBarColor(activity.getResources().getColor(colorResId));
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
+    //修改状态栏颜色开关
+    public void openChangeTitleColor(@ColorRes int id) {
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                getWindow().setStatusBarColor(getResources().getColor(id));
+                //底部导航栏
+                //window.setNavigationBarColor(activity.getResources().getColor(colorResId));
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -243,14 +241,6 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void setOpenScreenPortrait(boolean openScreenPortrait) {
         this.openScreenPortrait = openScreenPortrait;
-    }
-
-    public boolean isOpenChangeTitleColor() {
-        return openChangeTitleColor;
-    }
-
-    public void setOpenChangeTitleColor(boolean openChangeTitleColor) {
-        this.openChangeTitleColor = openChangeTitleColor;
     }
 
     public boolean isOpenEventBus() {
